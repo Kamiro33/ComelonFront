@@ -7,7 +7,7 @@ function ListaReservas({ backendUrl }) {
   useEffect(() => {
     const fetchReservas = async () => {
       try {
-        const response = await fetch(`${backendUrl}/reservas`);
+        const response = await fetch(`http://localhost:8080/reservas`);
         const data = await response.json();
         setReservas(data);
       } catch (error) {

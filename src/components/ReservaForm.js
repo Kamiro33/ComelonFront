@@ -18,25 +18,36 @@ function ReservaForm({ backendUrl, menus }) {
     const montoPorPersona = 10;
     const total = montoBase + (personas > 0 ? (personas - 1) * montoPorPersona : 0);
     setAmount(total);
-  }, [personas]);
+  }, [personas]); // El monto se recalcula cada vez que cambia el número de personas
 
-  // Simulación de la reserva
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    const reservaData = {
-      nombre,
-      fecha,
-      personas,
-      menuSeleccionado,
-    };
+    try {
+      const reservaData = {
+        nombre,
+        fecha,
+        personas,
+        menuSeleccionado,
+      };
 
-    // Simulamos un retraso en la respuesta del backend
-    setTimeout(() => {
-      console.log('Reserva simulada:', reservaData);
-      alert('Reserva simulada con éxito');
-      setReservaConfirmada(true); // Marcar la reserva como confirmada
-    }, 1000); // Simulamos un retraso de 1 segundo
+      // Realizar la reserva en el backend
+      const response = await fetch(`http://localhost:8080/reservas/crear`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reservaData),
+      });
+
+      if (response.ok) {
+        alert('Reserva realizada con éxito');
+        setReservaConfirmada(true); // Marcar la reserva como confirmada
+      } else {
+        alert('Error al realizar la reserva');
+      }
+    } catch (error) {
+      console.error('Error al enviar la reserva:', error);
+    }
   };
 
   const handlePagoExitoso = (details) => {
@@ -71,21 +82,17 @@ function ReservaForm({ backendUrl, menus }) {
 
         {/* Menú personalizado */}
         <select
-         value={menuSeleccionado}
-         onChange={(e) => setMenuSeleccionado(e.target.value)}
+          value={menuSeleccionado}
+          onChange={(e) => setMenuSeleccionado(e.target.value)}
           required
->
-        <option value="">Seleccionar Menú</option>
-         {menus && Array.isArray(menus) && menus.length > 0 ? (
-          menus.map((menu) => (
-          <option key={menu.id} value={menu.id}>
-         {menu.nombre}
-        </option>
-    ))
-  ) : (
-    <option disabled>Cargando menús...</option>
-  )}
-</select>
+        >
+          <option value="">Seleccionar Menú</option>
+          {menus.map((menu) => (
+            <option key={menu.id} value={menu.id}>
+              {menu.nombre}
+            </option>
+          ))}
+        </select>
 
         {/* Checkbox para pago anticipado */}
         <div>

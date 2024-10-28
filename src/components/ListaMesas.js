@@ -1,37 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function ListaMesas() {
   const [mesas, setMesas] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fakeMesas = [
-      { id: 1, numero: 5, capacidad: 4 },
-      { id: 2, numero: 7, capacidad: 6 },
-    ];
-
-    setTimeout(() => {
-      setMesas(fakeMesas);
-      setLoading(false);
-    }, 1000);
+    // Simular una llamada API
+    axios.get('http://localhost:8080/mesas')
+      .then(response => setMesas(response.data))
+      .catch(error => console.error(error));
   }, []);
 
-  if (loading) {
-    return <div>Cargando mesas...</div>;
-  }
-
   return (
-    <div>
-      <h1>Lista de Mesas</h1>
-      {mesas.length > 0 ? (
-        mesas.map((mesa) => (
-          <div key={mesa.id}>
-            <p>Mesa: {mesa.numero} - Capacidad: {mesa.capacidad}</p>
-          </div>
-        ))
-      ) : (
-        <p>No hay mesas disponibles.</p>
-      )}
+    <div className="lista-mesas">
+      <h2>Lista de Mesas</h2>
+      <ul>
+        {mesas.map((mesa) => (
+          <li key={mesa.id}>
+            <strong>{mesa.numero}</strong> - Capacidad: {mesa.capacidad} -{' '}
+            {mesa.disponible ? 'Disponible' : 'Ocupada'}{' '}
+            <Link to={`/editar-mesa/${mesa.id}`}>Editar</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

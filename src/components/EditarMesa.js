@@ -8,7 +8,7 @@ function EditarMesa({ backendUrl }) {
   useEffect(() => {
     const fetchMesa = async () => {
       try {
-        const response = await fetch(`${backendUrl}/mesas/${id}`);
+        const response = await fetch(`http://localhost:8080/mesas/${id}`);
         const data = await response.json();
         setMesa(data);
       } catch (error) {
@@ -21,7 +21,7 @@ function EditarMesa({ backendUrl }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${backendUrl}/mesas/${id}`, {
+      const response = await fetch(`http://localhost:8080/mesas/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
