@@ -1,0 +1,2 @@
+npx create-react-app mi-app
+npm install react-router-dom

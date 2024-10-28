@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .App {
+    text-align: center;
+  }
+  
+  .header {
+    background-color: #333;
+    padding: 1rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header h1 {
+    margin: 0;
+  }
+  
+  /* Ajuste de la navegación */
+  .nav {
+    display: flex;
+    gap: 2rem; /* Aumenta la separación entre los enlaces */
+  }
+  
+  /* Cambia el color de los enlaces */
+  .nav a {
+    color: #1e88e5; /* Color azul más suave */
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .nav a:hover {
+    color: #ff7043; /* Naranja vibrante en hover */
+  }
+  
+  /* Cambios para que los enlaces no se junten */
+  .nav a + a {
+    margin-left: 10px; /* Espacio entre enlaces consecutivos */
+  }
+  
+  .rol-selector {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .reserva-form, .lista-mesas, .editar-mesa {
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 5px;
+    max-width: 600px;
+  }
+  
+  input, select, button {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .mensaje-confirmacion {
+    color: green;
+  }
+
+
+  .nav a {
+  color: #007bff;
+  text-decoration: none;
+  margin-right: 1.5rem;
+  font-weight: bold;
+}
+
+.nav a:hover {
+  color: #ff7043;
+  text-decoration: underline;
+}
+
